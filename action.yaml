@@ -1,0 +1,34 @@
+name: 'Luet install'
+description: 'Install luet packages'
+inputs:
+  packages:  # id of input
+    description: 'Who to install'
+    required: true
+    default: ''
+  repository:  # id of input
+    description: 'Where to install things from'
+    required: true
+    default: ''
+  repository_reference:
+    description: 'Repository reference'
+    required: false
+    default: ''
+  repository_type:
+    description: 'Type of repository'
+    required: false
+    default: 'docker'
+  luet_tag:
+    description: 'Luet version'
+    required: false
+    default: 'latest'
+runs:
+  using: "composite"
+  steps:
+    - run: run.sh
+      env:
+        PACKAGES: ${{ inputs.packages }}
+        REPOSITORY: ${{ inputs.repository }}
+        REPOSITORY_TYPE: ${{ inputs.repository_type }}
+        REPOSITORY_REFERENCE: ${{ inputs.repository_reference }}
+        LUET_TAG: ${{ inputs.luet_tag }}
+      shell: bash
