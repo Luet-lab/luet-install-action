@@ -2,8 +2,9 @@
 
 set -ex
 
+docker rm luet || true
 docker run --name luet quay.io/luet/base:"$LUET_TAG" && docker cp luet:/usr/bin/luet ./
-docker rm luet
+docker rm luet || true
 chmod +x luet
 sudo mv luet /usr/bin/luet
 sudo mkdir -p /etc/luet/repos.conf.d/
